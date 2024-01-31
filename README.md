@@ -1,5 +1,7 @@
 # MySpar
 
+![ExampleViews](https://github.com/StevenKirke/MySpar/assets/33865213/4fb35756-9690-40d7-a49e-76b5086feb41)
+
 ## Description
 #### Данное приложение, является тестовой работой, верстки экрана использую SwiftUI.
 
