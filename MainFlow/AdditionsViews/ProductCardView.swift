@@ -103,6 +103,7 @@ private struct ReviewProductCard: View {
 					.foregroundColor(.white)
 					.fontWeight(.semibold)
 					.font(.system(size: 12))
+					.padding(.top, 5)
 			}
 		}
 	}

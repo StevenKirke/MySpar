@@ -102,6 +102,9 @@ private struct LabelForInfo: View {
 		- title: String Название или значения характеристики.
 		- alignment: Направление выравнивания фрейма.
 		- textAlignment: Направление выравнивания текста, вычисляемое свойство.
+		- width: Ширина экрана.
+		- currentFont: UIFont Настройки шрифта для вычисления длины строки.
+		- totalWidth: Ширина строки, для маски закрытия.
  */
 private struct TitleForLabel: View {
 
@@ -112,13 +115,14 @@ private struct TitleForLabel: View {
 	}
 
 	private let width: CGFloat = UIScreen.main.bounds.width
-	@State private var widthTitle: CGFloat = 0
+	private let currentFont: UIFont = .systemFont(ofSize: 14, weight: .semibold)
+	@State private var totalWidth: CGFloat = 0
 
 	var body: some View {
 		ZStack(alignment: alignment) {
 			Rectangle()
 				.fill(Color.white)
-				.frame(width: widthTitle, height: 10)
+				.frame(width: totalWidth, height: 10)
 			Text(title)
 				.fontWeight(.semibold)
 				.font(.system(size: 14))
@@ -137,9 +141,13 @@ private struct TitleForLabel: View {
 	 Метод вычисления ширины маски для текста.
 	 */
 	private func calculateWidth() {
-		self.widthTitle = title.widthOfText(currentFont: .systemFont(ofSize: 14, weight: .bold))
-		if self.widthTitle >= width / 2 {
-			self.widthTitle = width / 2
+		var current: CGFloat = 5
+		let components = title.components(separatedBy: .whitespacesAndNewlines)
+		for component in components {
+			current += component.widthOfText(currentFont: currentFont)
+			if current <= width / 2 {
+				totalWidth = current
+			}
 		}
 	}
 
