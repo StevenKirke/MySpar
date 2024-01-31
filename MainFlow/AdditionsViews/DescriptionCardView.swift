@@ -122,12 +122,12 @@ private struct TitleForLabel: View {
 		ZStack(alignment: alignment) {
 			Rectangle()
 				.fill(Color.white)
-				.frame(width: totalWidth, height: 10)
+				.frame(width: totalWidth, height: 15)
 			Text(title)
 				.fontWeight(.semibold)
 				.font(.system(size: 14))
 				.fixedSize(horizontal: false, vertical: true)
-				.clipped()
+				// .clipped()
 				.multilineTextAlignment(textAlignment)
 				.foregroundColor(.black)
 				.frame(maxWidth: width / 2, alignment: alignment)
@@ -141,11 +141,11 @@ private struct TitleForLabel: View {
 	 Метод вычисления ширины маски для текста.
 	 */
 	private func calculateWidth() {
-		var current: CGFloat = 5
+		var current: CGFloat = 10
 		let components = title.components(separatedBy: .whitespacesAndNewlines)
 		for component in components {
 			current += component.widthOfText(currentFont: currentFont)
-			if current <= width / 2 {
+			if current < width / 2 {
 				totalWidth = current
 			}
 		}
